@@ -1,0 +1,60 @@
+0. cd hydro_ws/sandbox/iris_v_sim/files/
+use ctl+shift+t to open new terminal tabs in the same directory
+
+1. roscore
+
+2. build tf tree and load ros parameters with 
+roslaunch 2015sim
+----------------------------------------------------------------------------------------------------
+(all of these are included in the launch file "2015sim.xml")
+
+  <node pkg="tf" type="static_transform_publisher" name="odom_node" args="3.78 0 0 1.57 0 0 map odom 2000" />
+
+-Parameters
+rosparam load move_base_params.yaml move_base_node
+---------------------------------------------------------------------------------------------------------
+
+3. Launch gazebo 
+rosrun gazebo_ros gazebo /home/peter/hydro_ws/sandbox/iris_v_sim/worlds/Arena.world
+
+4. convert point cloud to laserscan
+rosrun depthimage_to_laserscan depthimage_to_laserscan image:=camera/depth/image_raw camera_info:=camera/depth/camera_info
+
+5. Insert LEON kinect software if possible
+
+6.launch rviz
+rosrun rviz rviz
+
+7. Activate xbox controller
+roslaunch manual_robot_control xbox_control.launch
+
+8. start map server
+rosrun map_server map_server map_server_params.yaml
+
+9.start move_base
+rosrun move_base move_base
+
+10. Add obstacles in gazebo and set 2d nav goal in rviz
+-------------------------------------------------------------------------------------------------
+Rviz setup instructions:
+
+------------------------------------------------------
+manual operation
+
+roslaunch manual_robot_control xbox_control.launch
+
+rostopic pub /cmd_vel geometry_msgs/Twist '[0.5, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+
+rostopic pub /cmd_vel geometry_msgs/Twist '[0.0, 0.0, 0.0]' '[0.0, 0.0ros, 0.5]'
+
+rostopic pub /cmd_vel geometry_msgs/Twist '[0.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+
+rosrun tf static_transform_publisher 0 0 0 0 0 0 camera_frame camera_depth_optical_frame 100
+----------------------------------------------------------
+if gazebo is stuck running, run
+
+ps ax | grep [g]z
+and then
+
+kill (# of process)
+---------------------------------------
