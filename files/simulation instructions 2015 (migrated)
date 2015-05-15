@@ -15,7 +15,7 @@ rosparam load move_base_params.yaml move_base_node
 ---------------------------------------------------------------------------------------------------------
 
 3. Launch gazebo 
-rosrun gazebo_ros gazebo /home/peter/hydro_ws/sandbox/iris_v_sim/worlds/Arena.world
+rosrun gazebo_ros gazebo ../worlds/Arena.world
 
 4. convert point cloud to laserscan
 rosrun depthimage_to_laserscan depthimage_to_laserscan image:=camera/depth/image_raw camera_info:=camera/depth/camera_info

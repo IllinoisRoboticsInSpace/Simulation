@@ -17,5 +17,6 @@
     <node pkg="tf" type="static_transform_publisher" name="laser_node" args="0 0 0 1.57075 -1.57075 0 camera_link camera_depth_frame 34" /-->
 
     <rosparam file="move_base_params.yaml" ns="move_base_node"/>
+    <rosparam file="map_server_params.yaml" ns="map_server_node"/>
 </launch>
 

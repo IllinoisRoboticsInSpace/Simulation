@@ -1,0 +1,31 @@
+<!-- LAUNCH FILE FOR MISSION CONTROL -->
+
+<launch>
+
+  <node respawn="True" pkg="move_base" type="move_base"
+        name="move_base_node" output="screen" >
+    <rosparam command="load" file="move_base_params.yaml"/>
+  </node>
+
+  <!-- joy node -->
+  <node respawn="true"  pkg="joy"
+        type="joy_node" name="IRIS_joy" >
+    <param name="dev" value="/dev/input/js0" type="string" />
+  </node>
+
+  <!-- joy message cleanup node -->
+  <node respawn="true" pkg="manual_robot_control" type="joy_filter"
+        name="IRIS_joy_filter" output="screen">
+    <param name="threshold/x"       value="0.10" />
+    <param name="threshold/z"       value="0.12" />
+    <param name="threshold/jitter"  value="0.05" />
+    <param name="max_rate"          value="10"  type="double" />
+    <param name="min_rate"          value="2"   type="double" />
+    <param name="topic"             value="/IRIS/joy_filtered"/>
+  </node>
+
+  <!-- joy message -> cmd_vel -->
+  <node respawn="true" pkg="manual_robot_control" type="xbox_control.py"
+        name="joy_to_cmd_vel" />
+
+</launch>
