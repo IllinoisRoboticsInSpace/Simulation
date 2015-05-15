@@ -1,0 +1,6 @@
+<package>
+  <description brief="IRIS_V_URDF_2">IRIS_V_URDF_2</description>
+  <depend package="gazebo" />
+  <author>me</author>
+  <license>BSD</license>
+</package>

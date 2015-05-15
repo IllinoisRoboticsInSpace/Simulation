@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<launch>
+    <param name="use_sim_time" value="true" />
+  <!--param name="robot_description" textfile="~/.gazebo/models/IRIS_V_URDF_2/robots/IRIS_V_URDF_2.URDF"/-->
+    <node pkg="tf" type="static_transform_publisher" name="odom_node" args="3.78 0 0 1.57 0 0 map odom 2000" />
+
+    <node pkg="tf" type="static_transform_publisher" name="camera_node" args="0.67234 0.0001384 0.4551 -1.57 0 -1.57 base_footprint camera_frame 34" />
+
+    <!--node pkg="tf" type="static_transform_publisher" name="camera_node" args=".633596 0.0001384 .214115 -1.5708 0 -1.5708 base_footprint camera_frame 34" /-->
+
+
+
+
+    <!--Misc Nodes, not used
+    <node pkg="tf" type="static_transform_publisher" name="laser_node" args="0 0.516 0 1.57075 -1.57075 0 camera_frame camera_depth_frame 34" />
+    <node pkg="tf" type="static_transform_publisher" name="camera_node" args=".6365 0 0.516 -1.57075 0 -1.57075 base_footprint camera_link 34" />
+    <node pkg="tf" type="static_transform_publisher" name="laser_node" args="0 0 0 1.57075 -1.57075 0 camera_link camera_depth_frame 34" /-->
+
+    <rosparam file="move_base_params.yaml" ns="move_base_node"/>
+</launch>
+
