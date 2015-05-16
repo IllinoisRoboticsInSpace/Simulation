@@ -28,4 +28,10 @@
   <node respawn="true" pkg="manual_robot_control" type="xbox_control.py"
         name="joy_to_cmd_vel" />
 
+  <!-- fake kinect -->
+  <node respawn="true" pkg="obstacle_detection" type="simulate_kinect"
+        name="fakekinect_node" output="screen" >
+    <rosparam command="load" file="kinect_params.yaml" />
+  </node>
+
 </launch>
